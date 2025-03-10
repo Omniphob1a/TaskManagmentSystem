@@ -1,0 +1,5 @@
+C:\Users\volod\source\repos\TaskManagmentSystem\TaskManagmentSystem.Infrastructure\obj\Debug\net8.0\TaskManagmentSystem.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\volod\source\repos\TaskManagmentSystem\TaskManagmentSystem.Infrastructure\obj\Debug\net8.0\TaskManagmentSystem.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\volod\source\repos\TaskManagmentSystem\TaskManagmentSystem.Infrastructure\obj\Debug\net8.0\TaskManagmentSystem.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\volod\source\repos\TaskManagmentSystem\TaskManagmentSystem.Infrastructure\obj\Debug\net8.0\TaskManagmentSystem.Infrastructure.AssemblyInfo.cs
+C:\Users\volod\source\repos\TaskManagmentSystem\TaskManagmentSystem.Infrastructure\obj\Debug\net8.0\TaskManagmentSystem.Infrastructure.csproj.CoreCompileInputs.cache
