@@ -1,6 +1,6 @@
-﻿namespace LearninPlatform.Infrastructure.Authentication;
+﻿namespace TaskManagmentSystem.Infrastructure.Authentication;
 
 internal class CustomClaims
 {
-    internal const string UserId = "userId";
+	internal const string UserId = "userId";
 }

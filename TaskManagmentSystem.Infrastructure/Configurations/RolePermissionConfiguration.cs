@@ -23,15 +23,15 @@ public partial class RolePermissionConfiguration
         builder.HasData(ParseRolePermissions());
     }
 
-    private RolePermissionEntity[] ParseRolePermissions()
-    {
-        return _authorization.RolePermissions
-            .SelectMany(rp => rp.Permissions
-                .Select(p => new RolePermissionEntity
-                {
-                    RoleId = (int)Enum.Parse<Role>(rp.Role),
-                    PermissionId = (int)Enum.Parse<Permission>(p)
-                }))
-                .ToArray();
-    }
+	private RolePermissionEntity[] ParseRolePermissions()
+	{
+		return _authorization.RolePermissions
+			.SelectMany(rp => rp.Permissions
+				.Select(p => new RolePermissionEntity
+				{
+					RoleId = (int)Enum.Parse<Role>(rp.Role),
+					PermissionId = (int)Enum.Parse<Permission>(p)
+				}))
+			.ToArray();
+	}
 }

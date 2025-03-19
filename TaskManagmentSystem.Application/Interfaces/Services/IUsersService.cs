@@ -8,7 +8,7 @@ namespace TaskManagmentSystem.Application.Interfaces.Services
 {
     public interface IUsersService
     {
-        public Task Register(string email, string userName, string passwordHash);
-        public Task<string> Login(string username, string password);
+        Task Register(string email, string userName, string passwordHash);
+        Task<string> Login(string username, string password);
     }
 }

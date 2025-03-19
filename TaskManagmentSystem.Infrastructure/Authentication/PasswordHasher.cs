@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using TaskManagmentSystem.Application.Interfaces.Auth;
 
-namespace TaskManagmentSystem.Infrastructure.Security;
+namespace TaskManagmentSystem.Infrastructure.Authentication;
 public class PasswordHasher : IPasswordHasher
 {
-    public string Generate(string password)
-        => BCrypt.Net.BCrypt.EnhancedHashPassword(password);
+	public string Generate(string password)
+		=> BCrypt.Net.BCrypt.EnhancedHashPassword(password);
 
-    public bool Verify(string password, string hashedPassword)
-        => BCrypt.Net.BCrypt.EnhancedVerify(password, hashedPassword);
+	public bool Verify(string password, string hashedPassword)
+		=> BCrypt.Net.BCrypt.EnhancedVerify(password, hashedPassword);
 }

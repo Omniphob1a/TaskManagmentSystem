@@ -1,13 +1,28 @@
 using API.Extensions;
+using LearningPlatform.Persistence.Mappings;
+using Microsoft.AspNetCore.CookiePolicy;
+using TaskManagmentSystem.Application;
+using TaskManagmentSystem.Infrastructure;
+using TaskManagmentSystem.Infrastructure.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var configuration = builder.Configuration; 
 // Add services to the container.
+builder.Services.AddApiAuthentication(configuration);
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen();
+
+builder.Services
+    .AddApplication()
+    .AddInfrastructure(configuration);
+
+builder.Services.Configure<JwtOptions>(configuration.GetSection(nameof(JwtOptions)));
+
+builder.Services.Configure<AuthorizationOptions>(configuration.GetSection(nameof(AuthorizationOptions)));
+
+builder.Services.AddAutoMapper(typeof(DataBaseMappings));
 
 var app = builder.Build();
 
@@ -19,9 +34,12 @@ if (app.Environment.IsDevelopment())
 }
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
-
-app.MapControllers();
+app.UseCookiePolicy(new CookiePolicyOptions
+{
+	MinimumSameSitePolicy = SameSiteMode.Strict,
+	HttpOnly = HttpOnlyPolicy.Always,
+	Secure = CookieSecurePolicy.Always
+});
 
 app.UseAuthentication();
 

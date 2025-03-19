@@ -2,12 +2,10 @@
 {
     public class MyTaskEntity
     {
-        public Guid Id { get; private set; }
-        public string? Name { get; private set; }
-        public string? Description { get; private set; }
-        public string? Status { get; private set; }
-        public UserEntity? User { get; private set; }
-        public Guid UserId { get; private set; }
+        public Guid Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+		public string Description { get; set; } = string.Empty;
+		public string Status { get; set; } = string.Empty;
         public void ChangeName(string newName)
         {
             if (string.IsNullOrWhiteSpace(newName)) throw new ArgumentException("Name cannot be empty");

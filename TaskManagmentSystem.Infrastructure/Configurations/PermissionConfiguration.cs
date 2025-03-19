@@ -11,14 +11,14 @@ public partial class PermissionConfiguration : IEntityTypeConfiguration<Permissi
     {
         builder.HasKey(p => p.Id);
 
-        var permissions = Enum
-            .GetValues<Permission>()
-            .Select(p => new PermissionEntity
-            {
-                Id = (int)p,
-                Name = p.ToString()
-            });
+		var permissions = Enum
+			.GetValues<Permission>()
+			.Select(p => new PermissionEntity
+			{
+				Id = (int)p,
+				Name = p.ToString()
+			});
 
-        builder.HasData(permissions);
-    }
+		builder.HasData(permissions);
+	}
 }

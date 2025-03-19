@@ -19,7 +19,7 @@ namespace API.Endpoints
             [FromBody] RegisterUserRequest request,
             UsersService usersService)
         {
-            await usersService.Register(request.UserName, request.Email, request.Password);
+            await usersService.Register(request.Email, request.UserName, request.Password);
 
             return Results.Ok();
         }

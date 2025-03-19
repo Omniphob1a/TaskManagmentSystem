@@ -1,38 +1,72 @@
-﻿using System;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using TaskManagmentSystem.Application.Interfaces.Repositories;
 using TaskManagmentSystem.Core.Domain.Entities;
+using TaskManagmentSystem.Domain.Models;
+using TaskManagmentSystem.Infrastructure.Data;
 
 namespace TaskManagmentSystem.Infrastructure.Repositories
 {
-    internal class MyTaskRepository : IMyTaskRepository
+    public class MyTaskRepository : IMyTaskRepository
     {
-        public Task Create(MyTaskEntity myTask)
+		private readonly TaskManagmentSystemContext _context;
+		private readonly IMapper _mapper;
+        public MyTaskRepository(TaskManagmentSystemContext context, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _context = context;
+            _mapper = mapper;   
+        }
+        public async Task Create(MyTask myTask)
+        {
+            var taskEntity = new MyTaskEntity()
+            {
+                Id = myTask.Id,
+                Name = myTask.Name,
+                Description = myTask.Description,
+                Status = myTask.Status
+            };
+			await _context.Tasks.AddAsync(taskEntity);
         }
 
-        public Task Delete(Guid id)
+        public async Task Delete(Guid id)
         {
-            throw new NotImplementedException();
+            await _context.Tasks
+                .Where(task => task.Id == id)
+                .ExecuteDeleteAsync();
         }
 
-        public Task<IEnumerable<MyTaskEntity>> GetAll()
+        public async Task<List<MyTask>> GetAll()
         {
-            throw new NotImplementedException();
+			var myTaskEntities = await _context.Tasks
+		        .AsNoTracking()
+		        .ToListAsync();
+
+			return _mapper.Map<List<MyTask>>(myTaskEntities);
+		}
+
+        public async Task<MyTask> GetById(Guid id)
+        {
+            var myTaskEntity = await _context.Tasks
+                .AsNoTracking()
+                .FirstOrDefaultAsync(task => task.Id == id) ?? throw new Exception();
+
+            return _mapper.Map<MyTask>(myTaskEntity);
         }
 
-        public Task<MyTaskEntity> GetById(Guid id)
+        public async Task Update(Guid id, string name, string description, string status)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task Update(Guid id, string Name, string Description, string Status)
-        {
-            throw new NotImplementedException();
+            await _context.Tasks
+                .Where(task => task.Id == id)
+                .ExecuteUpdateAsync(s => s
+                .SetProperty(task => task.Name, name)
+                .SetProperty(task => task.Description, description)
+                .SetProperty(task => task.Status, status));   
         }
     }
 }

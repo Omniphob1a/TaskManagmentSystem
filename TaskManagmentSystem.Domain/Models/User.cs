@@ -1,7 +1,10 @@
 ﻿namespace TaskManagmentSystem.Core.Models;
 public class User
 {
-    private User(Guid id, string userName, string passwordHash, string email)
+    private User(Guid id,
+        string userName,
+        string passwordHash,
+        string email)
     {
         Id = id;
         UserName = userName;

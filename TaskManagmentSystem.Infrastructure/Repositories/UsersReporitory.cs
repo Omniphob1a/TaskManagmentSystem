@@ -25,20 +25,21 @@ namespace TaskManagmentSystem.Infrastructure.Repositories
         public async Task Add(User user)
         {
             var roleEntity = await _context.Roles
-            .SingleOrDefaultAsync(r => r.Id == (int)Role.User)
+            .SingleOrDefaultAsync(r => r.Id == (int)Role.Admin)
             ?? throw new InvalidOperationException();
 
             var userEntity = new UserEntity()
             {
                 Id = user.Id,
-                Username = user.UserName,
+                UserName = user.UserName,
                 PasswordHash = user.PasswordHash,
                 Email = user.Email,
                 Roles = [roleEntity]
             };
 
             await _context.Users.AddAsync(userEntity);
-        }
+			await _context.SaveChangesAsync();
+		}
 
         public async Task<User> GetByEmail(string email)
         {
@@ -49,9 +50,21 @@ namespace TaskManagmentSystem.Infrastructure.Repositories
             return _mapper.Map<User>(userEntity);
         }
 
-        public Task<HashSet<Permission>> GetUserPermissions(Guid userId)
-        {
-            throw new NotImplementedException();
-        }
-    }
+		public async Task<HashSet<Permission>> GetUserPermissions(Guid userId)
+		{
+			var roles = await _context.Users
+				.AsNoTracking()
+				.Include(u => u.Roles)
+				.ThenInclude(r => r.Permissions)
+				.Where(u => u.Id == userId)
+				.Select(u => u.Roles)
+				.ToListAsync();
+
+			return roles
+				.SelectMany(r => r)
+				.SelectMany(r => r.Permissions)
+				.Select(p => (Permission)p.Id)
+				.ToHashSet();
+		}
+	}
 }

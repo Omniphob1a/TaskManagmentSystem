@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using TaskManagmentSystem.Core.Enums;
 
-namespace LearninPlatform.Infrastructure.Authentication;
+namespace TaskManagmentSystem.Infrastructure.Authentication;
 
 public class PermissionRequirement(Permission[] permissions)
-    : IAuthorizationRequirement
+	: IAuthorizationRequirement
 {
-    public Permission[] Permissions { get; set; } = permissions;
+	public Permission[] Permissions { get; set; } = permissions;
 }

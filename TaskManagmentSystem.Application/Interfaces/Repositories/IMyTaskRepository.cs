@@ -1,12 +1,13 @@
 ﻿using TaskManagmentSystem.Core.Domain.Entities;
+using TaskManagmentSystem.Domain.Models;
 
 namespace TaskManagmentSystem.Application.Interfaces.Repositories
 {
     public interface IMyTaskRepository
     {
-        Task Create(MyTaskEntity myTask);
-        Task<MyTaskEntity> GetById(Guid id);
-        Task<IEnumerable<MyTaskEntity>> GetAll();
+        Task Create(MyTask myTask);
+        Task<MyTask> GetById(Guid id);
+        Task<List<MyTask>> GetAll();
         Task Update(Guid id, string Name, string Description, string Status);
         Task Delete(Guid id);
     }

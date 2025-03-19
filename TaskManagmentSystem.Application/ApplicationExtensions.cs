@@ -13,6 +13,7 @@ namespace TaskManagmentSystem.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddScoped<UsersService>();
+            services.AddScoped<MyTaskService>();
             return services;
         }
     }

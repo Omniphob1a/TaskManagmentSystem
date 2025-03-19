@@ -9,12 +9,7 @@ namespace TaskManagmentSystem.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<MyTaskEntity> builder)
         {
-            builder.Property(x => x.Id).ValueGeneratedOnAdd();
-            builder.Property(x => x.Id).HasColumnName("Id");
-            builder.HasKey(x => x.Id);
-
-            builder.
-                HasOne(x => x.User);
-        }
+			builder.HasKey(c => c.Id);
+		}
     }
 }
