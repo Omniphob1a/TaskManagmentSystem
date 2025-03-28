@@ -1,0 +1,46 @@
+services:
+  api:
+    container_name: task_management_api
+    build:
+      context: ..
+      dockerfile: TaskManagmentSystem.API/Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Production"
+      ASPNETCORE_URLS: "http://+:8080"
+      ConnectionStrings__TaskManagmentSystemContext: "Server=postgres;Port=5432;Database=db;User Id=postgres;Password=123;"
+    command: >
+      bash -c "echo 'Waiting for Postgres...' && 
+      until pg_isready -h postgres -p 5432; do sleep 1; done &&
+      echo 'Postgres is ready. Running migrations...' &&
+      dotnet ef database update --project TaskManagmentSystem.Infrastructure/TaskManagmentSystem.Infrastructure.csproj --startup-project TaskManagmentSystem.API/TaskManagmentSystem.API.csproj &&
+      echo 'Starting application...' &&
+      dotnet TaskManagmentSystem.API.dll"
+
+  postgres:
+    container_name: task_management_postgres
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "123"
+      POSTGRES_DB: "db"
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    container_name: task_management_redis
+    image: redis:7
+    restart: always
+    ports:
+      - "6379:6379"
+

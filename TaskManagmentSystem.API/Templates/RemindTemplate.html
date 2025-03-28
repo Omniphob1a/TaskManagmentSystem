@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Напоминание о задаче</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .task-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .task-title {
+            color: #2d3436;
+            margin-top: 0;
+        }
+        .deadline {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>⏰ Напоминание о задаче</h1>
+    </div>
+
+    <div class="task-card">
+        <h2 class="task-title">{{TaskName}}</h2>
+        <p><strong>Описание:</strong> {{TaskDescription}}</p>
+    </div>
+
+    <div class="footer">
+        <p>Это автоматическое напоминание от TaskManagmentSystem</p>
+        <p>Пожалуйста, не отвечайте на это письмо</p>
+    </div>
+</body>
+</html>

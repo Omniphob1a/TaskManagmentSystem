@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using TaskManagmentSystem.Application.Interfaces.Repositories;
 using TaskManagmentSystem.Core.Domain.Entities;
@@ -16,10 +18,12 @@ namespace TaskManagmentSystem.Infrastructure.Repositories
     public class MyTaskRepository : IMyTaskRepository
     {
 		private readonly TaskManagmentSystemContext _context;
+        private readonly IDistributedCache _cache;
 		private readonly IMapper _mapper;
-        public MyTaskRepository(TaskManagmentSystemContext context, IMapper mapper)
+        public MyTaskRepository(TaskManagmentSystemContext context, IMapper mapper, IDistributedCache cache)
         {
             _context = context;
+            _cache = cache; 
             _mapper = mapper;   
         }
         public async Task Create(MyTask myTask)
@@ -32,7 +36,8 @@ namespace TaskManagmentSystem.Infrastructure.Repositories
                 Status = myTask.Status
             };
 			await _context.Tasks.AddAsync(taskEntity);
-        }
+			await _context.SaveChangesAsync();
+		}
 
         public async Task Delete(Guid id)
         {
@@ -52,11 +57,30 @@ namespace TaskManagmentSystem.Infrastructure.Repositories
 
         public async Task<MyTask> GetById(Guid id)
         {
-            var myTaskEntity = await _context.Tasks
+			var cacheKey = $"Task_{id}";
+
+			// Пытаемся получить данные из кэша
+			var cachedData = await _cache.GetStringAsync(cacheKey);
+
+			if (!string.IsNullOrEmpty(cachedData))
+			{
+				return JsonSerializer.Deserialize<MyTask>(cachedData);
+			}
+
+			var myTaskEntity = await _context.Tasks
                 .AsNoTracking()
                 .FirstOrDefaultAsync(task => task.Id == id) ?? throw new Exception();
 
-            return _mapper.Map<MyTask>(myTaskEntity);
+            var result = _mapper.Map<MyTask>(myTaskEntity);
+
+            await _cache.SetStringAsync(cacheKey,
+                JsonSerializer.Serialize(result),
+                new DistributedCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5)
+                });
+
+            return result;
         }
 
         public async Task Update(Guid id, string name, string description, string status)

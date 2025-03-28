@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Task Reminder</title>
+    <style type="text/css">
+        /* Reset styles */
+        body { margin: 0; padding: 0; min-width: 100%; font-family: Arial, sans-serif; }
+        table { border-spacing: 0; }
+        td { padding: 0; }
+        img { border: 0; max-width: 100%; }
+        
+        /* Main styles */
+        .header { background-color: #f8f9fa; padding: 20px 0; }
+        .content { padding: 40px 20px; background-color: #ffffff; }
+        .task-details { margin: 20px 0; padding: 15px; background-color: #f8f9fa; border-radius: 5px; }
+        .deadline { color: #dc3545; font-weight: bold; }
+        .button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #007bff;
+            color: #ffffff !important;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .footer { background-color: #f8f9fa; padding: 20px; text-align: center; }
+    </style>
+</head>
+<body>
+    <center>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <!-- Header -->
+            <tr>
+                <td class="header" align="center">
+                    <table width="600" align="center">
+                        <tr>
+                            <td>
+                                <img src="[CompanyLogoURL]" 
+                                     alt="Company Logo" 
+                                     width="150" 
+                                     style="display: block; margin: 0 auto;" />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            
+            <!-- Content -->
+            <tr>
+                <td class="content" align="center">
+                    <table width="600" align="center">
+                        <tr>
+                            <td>
+                                <h1 style="color: #2d3436; margin-bottom: 30px;">
+                                    ⏰ Напоминание о задаче: [TaskName]
+                                </h1>
+                                
+                                <div class="task-details">
+                                    <p><strong>Срок выполнения:</strong> <span class="deadline">[Deadline]</span></p>
+                                    <p><strong>Описание:</strong></p>
+                                    <p style="color: #636e72;">[TaskDescription]</p>
+                                </div>
+
+                                <p style="margin: 25px 0;">
+                                    <a href="[TaskLink]" 
+                                       class="button"
+                                       target="_blank">
+                                        Перейти к задаче →
+                                    </a>
+                                </p>
+
+                                <p style="color: #636e72;">
+                                    Это автоматическое напоминание. Пожалуйста, не отвечайте на это письмо.<br>
+                                    Если задача уже выполнена, проигнорируйте это сообщение.
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            
+            <!-- Footer -->
+            <tr>
+                <td class="footer">
+                    <table width="600" align="center">
+                        <tr>
+                            <td style="color: #636e72; font-size: 12px;">
+                                <p>С уважением,<br>Команда [CompanyName]</p>
+                                <p>[CompanyAddress]<br>Телефон: [CompanyPhone]</p>
+                                <p>
+                                    <a href="[UnsubscribeLink]" 
+                                       style="color: #007bff; text-decoration: none;">
+                                        Отписаться от рассылки
+                                    </a>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </center>
+</body>
+</html>

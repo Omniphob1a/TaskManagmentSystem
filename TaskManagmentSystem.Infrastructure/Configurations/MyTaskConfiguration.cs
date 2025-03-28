@@ -5,11 +5,15 @@ using TaskManagmentSystem.Core.Domain.Entities;
 
 namespace TaskManagmentSystem.Infrastructure.Configurations
 {
-    public class MyTaskConfiguration : IEntityTypeConfiguration<MyTaskEntity>
+    public partial class MyTaskConfiguration : IEntityTypeConfiguration<MyTaskEntity>
     {
         public void Configure(EntityTypeBuilder<MyTaskEntity> builder)
         {
-			builder.HasKey(c => c.Id);
+			builder.HasKey(t => t.Id);
+
+            builder.HasMany(t => t.TaskHistories)
+                .WithOne(h => h.Task)
+                .HasForeignKey(h => h.TaskId);
 		}
     }
 }

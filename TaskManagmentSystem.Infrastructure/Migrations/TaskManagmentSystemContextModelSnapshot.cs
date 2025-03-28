@@ -193,6 +193,42 @@ namespace TaskManagmentSystem.Infrastructure.Migrations
                     b.ToTable("UserRoleEntity");
                 });
 
+            modelBuilder.Entity("TaskManagmentSystem.Domain.Entities.TaskHistoryEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("ChangeDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("ChangedByUserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("FieldName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("NewValue")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("OldValue")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("TaskId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChangedByUserId");
+
+                    b.HasIndex("TaskId");
+
+                    b.ToTable("TaskHistories");
+                });
+
             modelBuilder.Entity("TaskManagmentSystem.Core.Domain.Entities.RolePermissionEntity", b =>
                 {
                     b.HasOne("TaskManagmentSystem.Core.Domain.Entities.PermissionEntity", null)
@@ -221,6 +257,35 @@ namespace TaskManagmentSystem.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TaskManagmentSystem.Domain.Entities.TaskHistoryEntity", b =>
+                {
+                    b.HasOne("TaskManagmentSystem.Core.Domain.Entities.UserEntity", "User")
+                        .WithMany("TaskHistories")
+                        .HasForeignKey("ChangedByUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TaskManagmentSystem.Core.Domain.Entities.MyTaskEntity", "Task")
+                        .WithMany("TaskHistories")
+                        .HasForeignKey("TaskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Task");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TaskManagmentSystem.Core.Domain.Entities.MyTaskEntity", b =>
+                {
+                    b.Navigation("TaskHistories");
+                });
+
+            modelBuilder.Entity("TaskManagmentSystem.Core.Domain.Entities.UserEntity", b =>
+                {
+                    b.Navigation("TaskHistories");
                 });
 #pragma warning restore 612, 618
         }

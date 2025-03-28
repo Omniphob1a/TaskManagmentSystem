@@ -13,6 +13,6 @@ namespace TaskManagmentSystem.Application.Interfaces.Services
 		Task DeleteTask(Guid id);
 		Task<MyTask> GetTaskById(Guid id);
 		Task<List<MyTask>> GetTasks();
-		Task UpdateTask(Guid id, string name, string description, string status);
+		Task UpdateTask(MyTask oldTask, MyTask newTask, Guid userId);
 	}
 }

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,9 @@ using TaskManagmentSystem.Application.Interfaces.Repositories;
 using TaskManagmentSystem.Infrastructure.Authentication;
 using TaskManagmentSystem.Infrastructure.Data;
 using TaskManagmentSystem.Infrastructure.Repositories;
+using TaskManagmentSystem.Domain.Models;
+using Hangfire;
+using Hangfire.PostgreSql;
 
 namespace TaskManagmentSystem.Infrastructure
 {
@@ -23,11 +27,20 @@ namespace TaskManagmentSystem.Infrastructure
             options.UseNpgsql(configuration.GetConnectionString(nameof(TaskManagmentSystemContext)))
             );
             services.AddScoped<IUsersRepository, UsersReporitory>();
+            services.AddScoped<ITaskHistoryRepository, TaskHistoryRepository>();
             services.AddScoped<IMyTaskRepository, MyTaskRepository>();
             services.AddScoped<IJwtProvider, JwtProvider>();
             services.AddScoped<IPasswordHasher, PasswordHasher>();
-
-            return services;
+			services.AddStackExchangeRedisCache(options =>
+			{
+				options.Configuration = configuration["Redis:ConnectionString"]!;
+				options.InstanceName = configuration["Redis:InstanceName"]!;
+			});
+			services.Configure<MailSettings>(configuration.GetSection("MailSettings"));
+            services.AddHangfire(x => x.UsePostgreSqlStorage(configuration.GetConnectionString(nameof(TaskManagmentSystemContext))));
+			services.AddHangfireServer();
+			services.AddControllers();
+			return services;
         }
 
     }

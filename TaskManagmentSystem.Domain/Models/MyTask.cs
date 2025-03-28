@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace TaskManagmentSystem.Domain.Models
 {
     public class MyTask
     {
-        private MyTask(
+		[JsonConstructor]
+		private MyTask(
             Guid id,
             string name,
             string description,

@@ -5,6 +5,7 @@ C:\Users\volod\source\repos\TaskManagmentSystem\TaskManagmentSystem.Infrastructu
 C:\Users\volod\source\repos\TaskManagmentSystem\TaskManagmentSystem.Infrastructure\obj\Debug\net8.0\TaskManagmentSystem.Infrastructure.csproj.CoreCompileInputs.cache
 C:\Users\volod\source\repos\TaskManagmentSystem\TaskManagmentSystem.Infrastructure\obj\Debug\net8.0\TaskManagmentSystem.Infrastructure.sourcelink.json
 C:\Users\volod\source\repos\TaskManagmentSystem\TaskManagmentSystem.Infrastructure\bin\Debug\net8.0\TaskManagmentSystem.Infrastructure.deps.json
+C:\Users\volod\source\repos\TaskManagmentSystem\TaskManagmentSystem.Infrastructure\bin\Debug\net8.0\TaskManagmentSystem.Infrastructure.runtimeconfig.json
 C:\Users\volod\source\repos\TaskManagmentSystem\TaskManagmentSystem.Infrastructure\bin\Debug\net8.0\TaskManagmentSystem.Infrastructure.dll
 C:\Users\volod\source\repos\TaskManagmentSystem\TaskManagmentSystem.Infrastructure\bin\Debug\net8.0\TaskManagmentSystem.Infrastructure.pdb
 C:\Users\volod\source\repos\TaskManagmentSystem\TaskManagmentSystem.Infrastructure\bin\Debug\net8.0\TaskManagmentSystem.Application.dll
@@ -15,6 +16,5 @@ C:\Users\volod\source\repos\TaskManagmentSystem\TaskManagmentSystem.Infrastructu
 C:\Users\volod\source\repos\TaskManagmentSystem\TaskManagmentSystem.Infrastructure\obj\Debug\net8.0\TaskManagmentSystem.Infrastructure.dll
 C:\Users\volod\source\repos\TaskManagmentSystem\TaskManagmentSystem.Infrastructure\obj\Debug\net8.0\refint\TaskManagmentSystem.Infrastructure.dll
 C:\Users\volod\source\repos\TaskManagmentSystem\TaskManagmentSystem.Infrastructure\obj\Debug\net8.0\TaskManagmentSystem.Infrastructure.pdb
-C:\Users\volod\source\repos\TaskManagmentSystem\TaskManagmentSystem.Infrastructure\obj\Debug\net8.0\ref\TaskManagmentSystem.Infrastructure.dll
-C:\Users\volod\source\repos\TaskManagmentSystem\TaskManagmentSystem.Infrastructure\bin\Debug\net8.0\TaskManagmentSystem.Infrastructure.runtimeconfig.json
 C:\Users\volod\source\repos\TaskManagmentSystem\TaskManagmentSystem.Infrastructure\obj\Debug\net8.0\TaskManagmentSystem.Infrastructure.genruntimeconfig.cache
+C:\Users\volod\source\repos\TaskManagmentSystem\TaskManagmentSystem.Infrastructure\obj\Debug\net8.0\ref\TaskManagmentSystem.Infrastructure.dll

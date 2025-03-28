@@ -13,9 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManagmentSystem.Infrast
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{6EA6E6A6-DC82-49C0-B37F-BF9A912F8E36}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{0B62ED93-C076-40A7-863F-CF5AF28CBF04}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TaskManagmentSystem.API", "TaskManagmentSystem.API", "{0B62ED93-C076-40A7-863F-CF5AF28CBF04}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManagmentSystem.API", "API\TaskManagmentSystem.API.csproj", "{367C2044-498D-4F3D-9D1D-5569B0E9DCE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManagmentSystem.API", "TaskManagmentSystem.API\TaskManagmentSystem.API.csproj", "{367C2044-498D-4F3D-9D1D-5569B0E9DCE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

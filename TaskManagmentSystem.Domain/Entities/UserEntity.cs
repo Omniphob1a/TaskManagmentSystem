@@ -1,4 +1,5 @@
 ﻿using System;
+using TaskManagmentSystem.Domain.Entities;
 namespace TaskManagmentSystem.Core.Domain.Entities;
     public class UserEntity 
     { 
@@ -7,6 +8,6 @@ namespace TaskManagmentSystem.Core.Domain.Entities;
 	    public string PasswordHash { get; set; } = string.Empty;
 	    public string Email { get; set; } = string.Empty;
 	    public ICollection<RoleEntity> Roles { get; set; } = [];
-
-}
+        public List<TaskHistoryEntity> TaskHistories { get; set; } = [];
+}   
 

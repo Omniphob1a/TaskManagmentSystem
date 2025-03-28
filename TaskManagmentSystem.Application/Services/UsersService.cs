@@ -46,5 +46,9 @@ namespace TaskManagmentSystem.Application.Services
             var user = User.Create(Guid.NewGuid(), userName, hashedPassword, email);
             await _usersRepository.Add(user);
         }
-    }
+		public async Task<User?> GetUserByEmail(string email)
+		{
+			return await _usersRepository.GetByEmail(email);
+		}
+	}
 }
